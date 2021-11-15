@@ -1,0 +1,23 @@
+[
+    {
+        "model": "blogApi.blog",
+        "pk": 1,
+        "fields": {
+            "title": "Python Basics By Bala",
+            "description": "Basic python for beginners",
+            "publish_date": "2021-11-12",
+            "author": "Bala vasudevan"
+        }
+    },
+
+    {
+        "model": "blogApi.blog",
+        "pk": 2,
+        "fields": {
+            "title": "GraphQl Basics by Bala",
+            "description": "Basics of GraphQl",
+            "publish_date": "2021-11-11",
+            "author": "Balamurugan"
+        }
+    }
+]

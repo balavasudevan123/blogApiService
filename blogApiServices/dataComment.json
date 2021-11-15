@@ -1,0 +1,21 @@
+[
+    {
+        "model": "blogApi.comment",
+        "pk": 1,
+        "fields": {
+            "postIdMap": 2,
+            "author": "Venkatesh",
+            "comment": "Super! It is very much useful"
+        }
+    },
+
+    {
+        "model": "blogApi.comment",
+        "pk": 2,
+        "fields": {
+            "postIdMap": 2,
+            "author": "Venkatesh Vasu",
+            "comment": "Super! It is very much useful bro."
+        }
+    }
+]
