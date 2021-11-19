@@ -1,45 +1,7 @@
-#Schema File
-#Date: 2021-11-14
-#createdBy: Bala Vasudevan
 import graphene
-
-from graphene_django import DjangoObjectType, DjangoListField
+from .inputs import PostInput, CommentInput
 from .models import Blog, Comment
-
-class BlogFields(DjangoObjectType):
-    class Meta:
-        model = Blog
-        fields = "__all__"
-
-class CommentFields(DjangoObjectType):
-    class Meta:
-        model = Comment
-
-class Query(graphene.ObjectType):
-    allPosts = graphene.List(BlogFields)
-    allComments = graphene.List(CommentFields)
-    post = graphene.Field(BlogFields, postId=graphene.Int())
-
-    def resolve_allPosts(self, info, **kwargs):
-        return Blog.objects.all()
-
-    def resolve_post(self, info, postId):
-        return Blog.objects.get(id=postId)
-    
-    def resolve_allComments(self, info):
-        return Comment.objects.all()
-
-#Blog Posts Classes
-#Date: 2021-11-14
-#wroteBy: Bala Vasudevan
-class PostInput(graphene.InputObjectType):
-    id = graphene.ID()
-    title = graphene.String()
-    description = graphene.String()
-    publish_date = graphene.String()
-    author = graphene.String()
-
-#Blog Posts mutations for create, update, delete posts
+from .types import BlogFields, CommentFields
 
 #CreatePost Class to create a new post
 class CreatePost(graphene.Mutation):
@@ -93,16 +55,6 @@ class DeletePost(graphene.Mutation):
 
         return None
 
-#Posts Comments Classes
-#Date: 2021-11-15
-#wroteBy: Bala Vasudevan
-class CommentInput(graphene.InputObjectType):
-    postIdMapping = graphene.Int(required=True)
-    author = graphene.String()
-    comment = graphene.String()
-
-#Posts cpmments mutations for create, delete comments
-
 #CreateComment Class to write a new comment
 class CreateComment(graphene.Mutation):
     class Arguments:
@@ -142,6 +94,3 @@ class Mutation(graphene.ObjectType):
     delete_post = DeletePost.Field()
     add_comment = CreateComment.Field()
     delete_comment = DeleteComment.Field()
-
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
